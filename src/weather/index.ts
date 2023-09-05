@@ -13,7 +13,7 @@ export async function getWeatherForecast(location: string) {
     return data.timelines.daily.map((daily: { values: { temperatureAvg: number } }) => daily.values.temperatureAvg)
 }
 
-export async function getWeatherHistory(location: string, range: number) {
+export async function getWeatherHistory(location: string) {
     const response = await fetch(
         `https://api.tomorrow.io/v4/historical?apikey=${process.env.WEATHER_API_KEY}`,
         {
