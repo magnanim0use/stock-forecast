@@ -1,0 +1,18 @@
+{
+  "name": "housingcloud",
+  "version": "1.0.0",
+  "description": "Housing.cloud technical interview exercise.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Smith",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.5.9",
+    "dotenv": "^16.3.1",
+    "typescript": "^5.2.2"
+  }
+}
