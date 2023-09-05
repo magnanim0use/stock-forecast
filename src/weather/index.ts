@@ -10,7 +10,11 @@ export async function getWeatherForecast(location: string) {
 
     const response = await fetch(`https://api.tomorrow.io/v4/weather/forecast?${params.toString()}`)
     const data = await response.json()
-    return data.timelines.daily.map((daily: { values: { temperatureAvg: number } }) => daily.values.temperatureAvg)
+
+    return data.timelines.daily.map((daily: { time: string, values: { temperatureAvg: number } }) => ({
+        date: daily.time,
+        average: daily.values.temperatureAvg
+    }))
 }
 
 export async function getWeatherHistory(location: string) {
