@@ -18,4 +18,3 @@ app.listen({ port: 8080 }, (err, address) => {
     if (err) throw err
     console.log(`Server is now listening on ${address}`)
 })
-
