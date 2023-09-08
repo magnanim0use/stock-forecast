@@ -1,4 +1,6 @@
-import { db } from '../db'
+import db from '../db'
+
+console.log(db)
 
 require('dotenv').config()
 

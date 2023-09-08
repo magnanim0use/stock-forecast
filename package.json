@@ -4,24 +4,26 @@
   "description": "Housing.cloud technical interview exercise.",
   "scripts": {
     "build": "tsc",
-    "migrate": "node-pg-migrate",
+    "migrate": "node-pg-migrate; node ./scripts/insertHistoricalData.js",
     "start": "npm run build --watch; node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ryan Smith",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^20.5.9",
-    "@types/node-fetch": "^2.6.4",
-    "@types/pg": "^8.10.2",
     "dotenv": "^16.3.1",
+    "fast-csv": "^4.3.6",
     "fastify": "^4.22.2",
-    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.11.3",
     "pg-pool": "^3.6.1",
     "typescript": "^5.2.2",
     "yahoo-finance2": "^2.4.6"
   },
   "devDependencies": {
-    "@types/pg-pool": "^2.0.3"
+    "@types/node": "^20.5.9",
+    "@types/node-fetch": "^2.6.4",
+    "@types/pg": "^8.10.2",
+    "@types/pg-pool": "^2.0.3",
+    "node-pg-migrate": "^6.2.2"
   }
 }
