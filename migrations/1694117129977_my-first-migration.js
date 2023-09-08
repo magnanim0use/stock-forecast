@@ -1,17 +1,19 @@
-exports.up = pgm => {
-    pgm.createTable('weather', {
+exports.up = async function (pgm) {
+    await pgm.createTable('weather', {
         id: 'id',
         date: 'timestamp',
         location: 'text',
         avg_temp: 'numeric'
     })
 
-    pgm.createTable('customer', {
+    await pgm.createTable('customer', {
         id: 'id',
         name: 'text',
         slack_org: 'text',
         slack_channel: 'text'
     })
+
+    return pgm.addIndex('weather', 'customer')
 }
 
 exports.down = pgm => {

@@ -1,12 +1,12 @@
+import Pool from 'pg-pool'
 require('dotenv').config()
-import { Pool } from 'pg'
 
-const db = new Pool({
-    database: 'housing_cloud_demo',
-    user: 'housing_cloud_demo_user',
+const config = {
+    database: process.env.PGDATABASE,
     host: 'localhost',
-    password: process.env.DB_PASSWORD,
+    user: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
     port: 5432,
-})
+}
 
-export default db
+export const db = new Pool(config)

@@ -8,9 +8,9 @@ type GetForecastQueryString = {
 
 const app = fastify()
 
-// app.register(require('@fastify/postgres'), {
-//     connectionString: 'postgres://postgres@localhost/postgres'
-// })
+app.register(require('@fastify/postgres'), {
+    connectionString: 'postgres://postgres@localhost/postgres'
+})
 
 app.get<{ Querystring: GetForecastQueryString }>('/forecast', async (req, reply) => {
     const { stock, location } = req.query

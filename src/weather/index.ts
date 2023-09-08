@@ -1,4 +1,5 @@
-import db from '../db'
+import { db } from '../db'
+const demoData = require('../../data/nyc_historical_weather_data.json')
 require('dotenv').config()
 
 export async function getWeatherForecast(location: string) {
@@ -14,38 +15,23 @@ export async function getWeatherForecast(location: string) {
 
     return data.timelines.daily.map((daily: { time: string, values: { temperatureAvg: number } }) => ({
         date: daily.time,
-        average: daily.values.temperatureAvg
+        avgTemp: daily.values.temperatureAvg
     }))
 }
 
-export async function getMatchingWeatherDates(weather: { avgTemp: number }) {
-    return db.query(`
+export async function getMatchingWeatherDates(avgTemp: number) {
+    if (process.env.DEMO_DB) {
+        return demoData.days.filter((day: { temp: number }) => {
+            return Math.round(day.temp) === Math.round(avgTemp)
+        }).map((day: { datetime: string }) => day.datetime)
+    }
+
+    try {
+        db.query(`
         SELECT date FROM weather
-        WHERE avgTemp=${weather.avgTemp}
+        WHERE avg_temp=${avgTemp}
     `)
+    } catch (err) {
+        console.log({ err })
+    }
 }
-
-// export async function getWeatherHistory(location: string) {
-//     const response = await fetch(
-//         `https://api.tomorrow.io/v4/historical?apikey=${process.env.WEATHER_API_KEY}`,
-//         {
-//             method: 'POST',
-//             headers: { 'Accept-Encoding': 'gzip' },
-//             body: JSON.stringify({
-//                 location,
-//                 fields: [
-//                     'temperature'
-//                 ],
-//                 timesteps: [
-//                     '1d'
-//                 ],
-//                 startTime: '2023-09-00T00:00:00Z',
-//                 endTime: '2023-09-05T00:00:00Z',
-//                 units: 'metric'
-//             })
-//         }
-//     )
-
-//     const data = await response.json()
-//     console.log(data)
-// }
