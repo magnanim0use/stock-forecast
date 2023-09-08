@@ -1,7 +1,4 @@
 import db from '../db'
-
-console.log(db)
-
 require('dotenv').config()
 
 export async function getWeatherForecast(location: string) {
