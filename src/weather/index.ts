@@ -6,7 +6,7 @@ export async function getWeatherForecast(location: string) {
     const params = new URLSearchParams({
         location,
         timesteps: '1d',
-        units: 'metric',
+        units: 'imperial',
         apikey: process.env.WEATHER_API_KEY,
     })
 
@@ -23,9 +23,8 @@ export async function getMatchingWeatherDates(avgTemp: number) {
     const dbClient = await db.connect()
     const dates = await dbClient.query(`
         SELECT date FROM weather
-        WHERE avg_temp=${Math.round(avgTemp)}
+        WHERE avg_temp=${Math.round(avgTemp).toString()}
     `)
 
-    console.log({ dates })
-    return dates.rows
+    return dates.rows.map(r => r.date)
 }
