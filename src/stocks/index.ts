@@ -6,7 +6,7 @@ export async function getCurrentStockValue(stock: string) {
 }
 
 export async function getHistoricalStockValues(stock: string, dates: string[]) {
-    const results = await Promise.all(dates.map(async (date) => yahooFinance.historical(stock, { period1: date, interval: '1d' })))
+    const results = await Promise.all(dates.map(async (date) => yahooFinance.historical(stock, { period1: date })))
     return results.map(result => {
         const { date, open, close } = result[0]
         return {

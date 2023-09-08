@@ -5,7 +5,7 @@ const fastcsv = require('fast-csv')
 const fastify = require('fastify')()
 const fs = require('node:fs')
 const path = require('node:path')
-const dbClient = new db.Client()
+// const dbClient = new db.Client()
 
 const parseCsv = (path) => {
     return new Promise((res, rej) => {
@@ -29,7 +29,21 @@ const parseCsv = (path) => {
 }
 
 const insertToDb = async (data) => {
-    return Promise.all(data.map(d => dbClient.query(`INSERT INTO weather (date, location, avg_temp) VALUES (${d.date}, ${d.location}, ${d.avgTemp})`)))
+    const dbClient = await db.connect()
+    await Promise.all(data.map(async d => {
+        try {
+            //TODO avoid duplicatees
+            await db.query(
+                `INSERT INTO weather (date, location, avg_temp) VALUES ($1, $2, $3)`,
+                [d.date, d.location, Math.round(Number(d.avgTemp))]
+            )
+        } catch (err) {
+            console.log({ err })
+        }
+    }))
+
+    dbClient.release()
+    process.exit(0)
 }
 
 (async () => {

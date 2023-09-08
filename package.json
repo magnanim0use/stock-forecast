@@ -4,8 +4,8 @@
   "description": "Housing.cloud technical interview exercise.",
   "scripts": {
     "build": "tsc",
-    "migrate": "npm run build; db-migrate; node ./dist/db; node ./scripts/insertHistoricalData.js",
-    "start": "npm run build --watch; node dist/app.js",
+    "migrate": "npm run build && node-pg-migrate up && node ./scripts/insertHistoricalData.js",
+    "start": "npm run build; node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ryan Smith",

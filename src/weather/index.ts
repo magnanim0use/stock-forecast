@@ -20,18 +20,12 @@ export async function getWeatherForecast(location: string) {
 }
 
 export async function getMatchingWeatherDates(avgTemp: number) {
-    if (process.env.DEMO_DB) {
-        return demoData.days.filter((day: { temp: number }) => {
-            return Math.round(day.temp) === Math.round(avgTemp)
-        }).map((day: { datetime: string }) => day.datetime)
-    }
-
-    try {
-        db.query(`
+    const dbClient = await db.connect()
+    const dates = await dbClient.query(`
         SELECT date FROM weather
-        WHERE avg_temp=${avgTemp}
+        WHERE avg_temp=${Math.round(avgTemp)}
     `)
-    } catch (err) {
-        console.log({ err })
-    }
+
+    console.log({ dates })
+    return dates.rows
 }

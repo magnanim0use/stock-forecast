@@ -15,7 +15,7 @@ app.register(require('@fastify/postgres'), {
 app.get<{ Querystring: GetForecastQueryString }>('/forecast', async (req, reply) => {
     const { stock, location } = req.query
     const forecast = await getPrediction(stock, location)
-    reply.send({ data: { forecast } })
+    reply.send({ data: forecast })
 })
 
 app.listen({ port: 8080 }, (err, address) => {
