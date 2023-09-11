@@ -11,6 +11,7 @@
   "author": "Ryan Smith",
   "license": "ISC",
   "dependencies": {
+    "@fastify/formbody": "^7.4.0",
     "@fastify/postgres": "^5.2.0",
     "dotenv": "^16.3.1",
     "fast-csv": "^4.3.6",

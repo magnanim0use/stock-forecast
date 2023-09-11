@@ -27,4 +27,4 @@ psql postgres -c "CREATE DATABASE housing_cloud_demo WITH OWNER housing_cloud_de
 I used Postman to check the GET /forecast endpoints. You may use something like:
 `GET http://localhost:8080/forecast?stock=AAPL&location=NYC`
 
-Slack instructions are forthcoming.
+Instructions for configuring the command in a Slack app is located at [https://api.slack.com/interactivity/slash-commands]. The url for the command would be `https://<local proxy created by ngrok>/slack/command`.
