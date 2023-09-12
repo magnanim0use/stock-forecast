@@ -1,11 +1,7 @@
-require('dotenv').config()
-const fastifyPostgres = require('@fastify/postgres')
 const { db } = require('../dist/db')
 const fastcsv = require('fast-csv')
-const fastify = require('fastify')()
 const fs = require('node:fs')
 const path = require('node:path')
-// const dbClient = new db.Client()
 
 const parseCsv = (path) => {
     return new Promise((res, rej) => {

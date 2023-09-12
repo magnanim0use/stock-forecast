@@ -18,10 +18,6 @@ const app = fastify()
 
 app.register(require('@fastify/formbody'))
 
-app.register(require('@fastify/postgres'), {
-    connectionString: 'postgres://postgres@localhost/postgres'
-})
-
 app.get<{ Querystring: GetForecastQueryString }>('/forecast', async (req, reply) => {
     const { stock, location } = req.query
     const forecast = await getPrediction(stock, location)
