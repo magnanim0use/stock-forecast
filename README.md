@@ -17,8 +17,8 @@ Create a file in the root directory called `.env` and copy contents from `.env.t
 I will provide the PGPASSWORD & WEATHER_API_KEY env values and you can fill those in accordingly.
 
 # For PostgreSQL installed with Homebrew
-psql postgres -c "CREATE ROLE housing_cloud_demo_user WITH LOGIN CREATEDB PASSWORD ${env.PGPASSWORD};"
-psql postgres -c "CREATE DATABASE housing_cloud_demo WITH OWNER housing_cloud_demo_user;"
+psql postgres -c "CREATE ROLE demo_user WITH LOGIN CREATEDB PASSWORD ${env.PGPASSWORD};"
+psql postgres -c "CREATE DATABASE demo WITH OWNER demo_user;"
 
 - `npm install`
 - `npm run migrate up`

@@ -41,7 +41,7 @@ app.post<{ Body: PostSlackCommandBody }>('/slack/command', async (req, reply) =>
                 type: 'section',
                 text: {
                     type: 'mrkdwn',
-                    text: `${forecast.date.slice(0, 9)} => $${Math.round(forecast.predictedStockValue * 100) / 100} USD`
+                    text: `${forecast.date.slice(0, 10)} => $${Math.round(forecast.predictedStockValue * 100) / 100} USD`
                 }
             }
         ]
